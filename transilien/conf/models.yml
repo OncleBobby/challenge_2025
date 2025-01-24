@@ -1,2 +1,36 @@
 xgboost:
   class: models.xgboost_model.XgboostModel
+xgb_gblinear:
+  class: models.xgboost_model.XgboostModel
+  params:
+    booster: gblinear
+    tree_method: hist
+    max_depth: 8 
+    learning_rate: 0.025
+    objective: "multi:softprob"
+    num_class: 3
+    eval_metric: mlogloss
+xgb_gbtree:
+  class: models.xgboost_model.XgboostModel
+  params:
+    booster: gbtree
+    tree_method: hist
+    max_depth: 8 
+    learning_rate: 0.025
+    objective: "multi:softprob"
+    num_class: 2
+    eval_metric: mlogloss
+xgb_dart:
+  class: models.xgboost_model.XgboostModel
+  params:
+    booster: dart
+    tree_method: hist
+    max_depth: 8 
+    learning_rate: 0.025
+    objective: "multi:softprob"
+    num_class: 2
+    eval_metric: mlogloss
+dummy:
+  class: models.sklearn_model.SklearnModel
+  params:
+    class_name: sklearn.dummy.DummyClassifier

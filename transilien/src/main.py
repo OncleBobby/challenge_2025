@@ -1,12 +1,9 @@
-import logging, pandas
+import logging, pandas, logging.config
 
-def prepare_data(x_columns):
+def prepare_data(x_columns, train_path = f'../data/train/', test_path = f'../data/test/'):
     from sklearn.preprocessing import LabelEncoder
     from sklearn.model_selection import train_test_split
 
-
-    train_path = f'../data/train/'
-    test_path = f'../data/test/'
     x_category_columns = ['train', 'gare', 'date']
 
     y_column = 'p0q0'
@@ -23,3 +20,21 @@ def prepare_data(x_columns):
 
     x_train, x_test, y_train, y_test = train_test_split(x_train, y_train, test_size=0.2, random_state=0)
     return x_train, x_test, y_train, y_test, x_to_predict
+
+
+if __name__ == "__main__":
+    from models.factory import ModelFactory
+    import yaml
+    train_path = f'transilien/data/train/'
+    test_path = f'transilien/data/test/'
+    with open('transilien/conf/log.yml', 'rt') as f:
+        config = yaml.safe_load(f.read())
+    logging.config.dictConfig(config)
+    with open('transilien/conf/models.yml', 'r') as file:
+        configurations = yaml.safe_load(file)
+    x_columns = ['train', 'gare', 'date', 'arret', 'p2q0', 'p3q0', 'p4q0', 'p0q2', 'p0q3', 'p0q4']
+    x_columns = ['gare', 'arret', 'p2q0', 'p3q0', 'p4q0', 'p0q2', 'p0q3', 'p0q4']
+    x_train, x_test, y_train, y_test, x_to_predict = prepare_data(x_columns, train_path, test_path)
+    factory = ModelFactory(configurations, x_train, y_train, x_test, y_test)
+    for model in factory.get_models():
+        evaluation = model.evaluate()
