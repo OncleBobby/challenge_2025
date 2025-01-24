@@ -1,0 +1,2 @@
+xgboost:
+  class: models.xgboost_model.XgboostModel

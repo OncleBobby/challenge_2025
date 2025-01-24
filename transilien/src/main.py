@@ -23,12 +23,3 @@ def prepare_data(x_columns):
 
     x_train, x_test, y_train, y_test = train_test_split(x_train, y_train, test_size=0.2, random_state=0)
     return x_train, x_test, y_train, y_test, x_to_predict
-def get_model(x_train, y_train):
-    from xgboost import XGBRegressor
-    model = XGBRegressor()
-    model.fit(x_train, y_train)
-    return model
-def evaluate(model, x_test, y_test):
-    from sklearn.metrics import mean_absolute_error
-    y_pred = pandas.DataFrame(model.predict(x_test))
-    return mean_absolute_error(y_test, y_pred)
