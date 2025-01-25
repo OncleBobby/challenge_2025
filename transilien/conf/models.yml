@@ -1,5 +1,7 @@
 xgboost:
   class: models.xgboost_model.XgboostModel
+lightgbm:
+  class: models.lightgbm_model.LightgbmModel
 xgb_gblinear:
   class: models.xgboost_model.XgboostModel
   params:
@@ -34,3 +36,36 @@ dummy:
   class: models.sklearn_model.SklearnModel
   params:
     class_name: sklearn.dummy.DummyClassifier
+logistic:
+  class: models.sklearn_model.SklearnModel  
+  params:
+    random_state: 0
+    class_name: sklearn.linear_model.LogisticRegression
+linear:
+  class: models.sklearn_model.SklearnModel  
+  params:
+    class_name: sklearn.linear_model.LinearRegression
+bernoulli:
+  class: models.sklearn_model.SklearnModel  
+  params:
+    class_name: sklearn.naive_bayes.BernoulliNB
+gaussian:
+  class: models.sklearn_model.SklearnModel  
+  params:
+    class_name: sklearn.naive_bayes.GaussianNB
+kneighbors:
+  class: models.sklearn_model.SklearnModel  
+  params:
+    class_name: sklearn.neighbors.KNeighborsRegressor
+mlp:
+  class: models.sklearn_model.SklearnModel  
+  params:
+    class_name: sklearn.neural_network.MLPRegressor
+decisionTree:
+  class: models.sklearn_model.SklearnModel  
+  params:
+    class_name: sklearn.tree.DecisionTreeRegressor
+extraTree:
+  class: models.sklearn_model.SklearnModel  
+  params:
+    class_name: sklearn.tree.ExtraTreeRegressor
