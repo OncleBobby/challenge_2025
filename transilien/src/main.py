@@ -1,4 +1,4 @@
-import logging, pandas, logging.config
+import logging, pandas, yaml, logging.config, time, numpy
 
 def prepare_data(x_columns, train_path = f'../data/train/', test_path = f'../data/test/'):
     from sklearn.preprocessing import LabelEncoder
@@ -20,6 +20,22 @@ def prepare_data(x_columns, train_path = f'../data/train/', test_path = f'../dat
 
     x_train, x_test, y_train, y_test = train_test_split(x_train, y_train, test_size=0.2, random_state=0)
     return x_train, x_test, y_train, y_test, x_to_predict
+
+def evaluate_models(x_train, y_train, x_test, y_test):
+    from models.factory import ModelFactory
+    with open('../conf/models.yml', 'r') as file:
+        configurations = yaml.safe_load(file)
+    factory = ModelFactory(configurations, x_train, y_train, x_test, y_test)
+    lines = []
+    for model in factory.get_models():
+        start = time.time()
+        score = model.evaluate()
+        end = time.time()
+        duration = numpy.round((end-start), 2)
+        logging.info(f'{model.name}={numpy.round(score, 4)} in {duration}s')
+        lines.append({'name': model.name, 'score': score, 'duration': duration})
+    df = pandas.DataFrame(lines).sort_values(by=['score'], ascending=True)
+    return df
 
 
 if __name__ == "__main__":

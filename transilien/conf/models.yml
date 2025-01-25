@@ -2,45 +2,45 @@ xgboost:
   class: models.xgboost_model.XgboostModel
 lightgbm:
   class: models.lightgbm_model.LightgbmModel
-xgb_gblinear:
-  class: models.xgboost_model.XgboostModel
-  params:
-    booster: gblinear
-    tree_method: hist
-    max_depth: 8 
-    learning_rate: 0.025
-    objective: "multi:softprob"
-    num_class: 3
-    eval_metric: mlogloss
-xgb_gbtree:
-  class: models.xgboost_model.XgboostModel
-  params:
-    booster: gbtree
-    tree_method: hist
-    max_depth: 8 
-    learning_rate: 0.025
-    objective: "multi:softprob"
-    num_class: 2
-    eval_metric: mlogloss
-xgb_dart:
-  class: models.xgboost_model.XgboostModel
-  params:
-    booster: dart
-    tree_method: hist
-    max_depth: 8 
-    learning_rate: 0.025
-    objective: "multi:softprob"
-    num_class: 2
-    eval_metric: mlogloss
+# xgb_gblinear:
+#   class: models.xgboost_model.XgboostModel
+#   params:
+#     booster: gblinear
+#     tree_method: hist
+#     max_depth: 8 
+#     learning_rate: 0.025
+#     objective: "multi:softprob"
+#     num_class: 3
+#     eval_metric: mlogloss
+# xgb_gbtree:
+#   class: models.xgboost_model.XgboostModel
+#   params:
+#     booster: gbtree
+#     tree_method: hist
+#     max_depth: 8 
+#     learning_rate: 0.025
+#     objective: "multi:softprob"
+#     num_class: 2
+#     eval_metric: mlogloss
+# xgb_dart:
+#   class: models.xgboost_model.XgboostModel
+#   params:
+#     booster: dart
+#     tree_method: hist
+#     max_depth: 8 
+#     learning_rate: 0.025
+#     objective: "multi:softprob"
+#     num_class: 2
+#     eval_metric: mlogloss
 dummy:
   class: models.sklearn_model.SklearnModel
   params:
     class_name: sklearn.dummy.DummyClassifier
-logistic:
-  class: models.sklearn_model.SklearnModel  
-  params:
-    random_state: 0
-    class_name: sklearn.linear_model.LogisticRegression
+# logistic:
+#   class: models.sklearn_model.SklearnModel  
+#   params:
+#     random_state: 0
+#     class_name: sklearn.linear_model.LogisticRegression
 linear:
   class: models.sklearn_model.SklearnModel  
   params:
@@ -53,14 +53,14 @@ gaussian:
   class: models.sklearn_model.SklearnModel  
   params:
     class_name: sklearn.naive_bayes.GaussianNB
-kneighbors:
-  class: models.sklearn_model.SklearnModel  
-  params:
-    class_name: sklearn.neighbors.KNeighborsRegressor
-mlp:
-  class: models.sklearn_model.SklearnModel  
-  params:
-    class_name: sklearn.neural_network.MLPRegressor
+# kneighbors:
+#   class: models.sklearn_model.SklearnModel  
+#   params:
+#     class_name: sklearn.neighbors.KNeighborsRegressor
+# mlp:
+#   class: models.sklearn_model.SklearnModel  
+#   params:
+#     class_name: sklearn.neural_network.MLPRegressor
 decisionTree:
   class: models.sklearn_model.SklearnModel  
   params:
