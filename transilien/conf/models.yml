@@ -2,6 +2,10 @@ xgboost:
   class: models.xgboost_model.XgboostModel
 lightgbm:
   class: models.lightgbm_model.LightgbmModel
+catboost:
+  class: models.catboost_model.CatboostModel
+# keras:
+#   class: models.keras_model.KerasModel
 # xgb_gblinear:
 #   class: models.xgboost_model.XgboostModel
 #   params:
@@ -49,10 +53,10 @@ bernoulli:
   class: models.sklearn_model.SklearnModel  
   params:
     class_name: sklearn.naive_bayes.BernoulliNB
-gaussian:
-  class: models.sklearn_model.SklearnModel  
-  params:
-    class_name: sklearn.naive_bayes.GaussianNB
+# gaussian:
+#   class: models.sklearn_model.SklearnModel  
+#   params:
+#     class_name: sklearn.naive_bayes.GaussianNB
 # kneighbors:
 #   class: models.sklearn_model.SklearnModel  
 #   params:
@@ -61,11 +65,11 @@ gaussian:
 #   class: models.sklearn_model.SklearnModel  
 #   params:
 #     class_name: sklearn.neural_network.MLPRegressor
-decisionTree:
-  class: models.sklearn_model.SklearnModel  
-  params:
-    class_name: sklearn.tree.DecisionTreeRegressor
-extraTree:
-  class: models.sklearn_model.SklearnModel  
-  params:
-    class_name: sklearn.tree.ExtraTreeRegressor
+# decisionTree:
+#   class: models.sklearn_model.SklearnModel  
+#   params:
+#     class_name: sklearn.tree.DecisionTreeRegressor
+# extraTree:
+#   class: models.sklearn_model.SklearnModel  
+#   params:
+#     class_name: sklearn.tree.ExtraTreeRegressor
