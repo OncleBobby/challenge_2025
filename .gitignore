@@ -171,7 +171,4 @@ cython_debug/
 .pypirc
 transilien/data/**/*.csv
 token
-transilien/notebook/catboost_info/catboost_training.json
-transilien/notebook/catboost_info/learn_error.tsv
-transilien/notebook/catboost_info/time_left.tsv
-transilien/notebook/catboost_info/learn/events.out.tfevents
+transilien/notebook/catboost_info/*
