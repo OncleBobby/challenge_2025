@@ -16,10 +16,10 @@ class Model:
        self.fit()
     return pandas.DataFrame(self.model.predict(x)).rename(columns={0: 'p0q0'})
   def evaluate(self):
-      y_pred = self.predict(self.x_test)
-      from sklearn.metrics import mean_absolute_error
-      mae = mean_absolute_error(self.y_test, y_pred)
-      return mae
+    y_pred = self.predict(self.x_test)
+    from sklearn.metrics import mean_absolute_error
+    mae = mean_absolute_error(self.y_test, y_pred)
+    return mae
   def save(self, X, file_name_pattern='../data/test/y_predict{name}.csv'):
       y_pred = self.predict(X)
       y_pred.to_csv(file_name_pattern.format(name=self.name), index=False)
