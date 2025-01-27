@@ -10,8 +10,9 @@ class KerasModel(Model):
     self.history = None
   def fit(self):
     layers = [keras.Input(shape=(self.x_train.shape[1],))]
-    layers.append(keras.layers.Dense(10, activation="relu"))
-    layers.append(keras.layers.Dense(10, activation="relu"))
+    for layer in self.params['layers']:
+      layers.append(keras.layers.Dense(layer['units'], activation=layer['activation']))
+      layers.append(keras.layers.Dense(10, activation="relu"))
     layers.append(keras.layers.Dense(1, activation="linear"))
     self.model = keras.Sequential(layers)
     # self.model.summary()

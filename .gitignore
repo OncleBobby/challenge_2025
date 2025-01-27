@@ -172,3 +172,4 @@ cython_debug/
 transilien/data/**/*.csv
 token
 transilien/notebook/catboost_info/*
+catboost_info/*
