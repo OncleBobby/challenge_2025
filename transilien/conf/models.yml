@@ -4,8 +4,12 @@ lightgbm:
   class: models.lightgbm_model.LightgbmModel
 catboost:
   class: models.catboost_model.CatboostModel
-# keras:
-#   class: models.keras_model.KerasModel
+keras:
+  class: models.keras_model.KerasModel
+  params:
+    batch_size: 16
+    epochs: 100
+    validation_split: 0.3
 # xgb_gblinear:
 #   class: models.xgboost_model.XgboostModel
 #   params:

@@ -22,4 +22,4 @@ class Model:
     return mae
   def save(self, X, file_name_pattern='../data/test/y_predict{name}.csv'):
       y_pred = self.predict(X)
-      y_pred.to_csv(file_name_pattern.format(name=self.name), index=False)
+      y_pred.to_csv(file_name_pattern.format(name=self.name))

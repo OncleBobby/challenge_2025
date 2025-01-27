@@ -33,7 +33,7 @@ def prepare_data(x_columns, train_path = f'../data/train/', test_path = f'../dat
     x_train, x_test, y_train, y_test = _train_test_split(x_train, y_train, test_size=0.2)
     return x_train[x_columns], x_test[x_columns], y_train[[y_column]], y_test[[y_column]], x_to_predict[x_columns]
 
-def evaluate_models(x_train, y_train, x_test, y_test):
+def evaluate_models(x_train, y_train, x_test, y_test, x_to_predict=None):
     from models.factory import ModelFactory
     with open('../conf/models.yml', 'r') as file:
         configurations = yaml.safe_load(file)
@@ -46,6 +46,8 @@ def evaluate_models(x_train, y_train, x_test, y_test):
         duration = numpy.round((end-start), 2)
         logging.info(f'{model.name}={numpy.round(score, 4)} in {duration}s')
         lines.append({'name': model.name, 'score': score, 'duration': duration})
+        if not x_to_predict is None:
+            model.save(x_to_predict, file_name_pattern='../data/test/y_predict_{name}.csv')
     df = pandas.DataFrame(lines).sort_values(by=['score'], ascending=True)
     return df
 
