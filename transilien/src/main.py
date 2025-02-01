@@ -26,6 +26,10 @@ def encode_with_one_hot(x_train, x_valid, x_category_columns):
     # Add one-hot encoded columns to numerical features
     new_x_train = pandas.concat([numeric_x_train, cols_train], axis=1)
     new_x_valid = pandas.concat([numeric_x_valid, cols_valid], axis=1)
+
+    new_x_train.columns = [str(col) for col in new_x_train.columns]
+    new_x_valid.columns = [str(col) for col in new_x_valid.columns]
+
     return new_x_train, new_x_valid
 def prepare_data(x_columns, train_path = f'../data/train/', test_path = f'../data/test/'):
     from sklearn.preprocessing import LabelEncoder
