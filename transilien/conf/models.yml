@@ -8,10 +8,15 @@ keras:
   class: models.keras_model.KerasModel
   params:
     batch_size: 16
-    epochs: 20
+    epochs: 1
     validation_split: 0.3
     layers:
-      - { units: 10, activation: relu }
+      - { units: 25, activation: elu }
+      - { units: 25, activation: elu }
+      - { units: 25, activation: elu }
+      - { units: 25, activation: elu }
+      - { units: 25, activation: elu }
+      - { units: 1, activation: linear }
 # xgb_gblinear:
 #   class: models.xgboost_model.XgboostModel
 #   params:
