@@ -8,7 +8,7 @@ def encode_with_label(x_train, x_valid, x_category_columns):
             x_train[column]= encoder.fit_transform(x_train[column])
             x_valid[column] = encoder.transform(x_valid[column])
     return x_train, x_valid
-def encode_with_one_hot(x_train, x_valid, x_category_columns):
+def encode_with_one_hot(x_train, x_valid):
     from sklearn.preprocessing import OneHotEncoder
     columns = ['gare']
     encoder = OneHotEncoder(handle_unknown='ignore', sparse_output=False)
@@ -31,6 +31,18 @@ def encode_with_one_hot(x_train, x_valid, x_category_columns):
     new_x_valid.columns = [str(col) for col in new_x_valid.columns]
 
     return new_x_train, new_x_valid
+def encode_with_custom(x_train, x_valid):
+    new_x_train = x_train.copy()
+    new_x_valid = x_valid.copy()
+    gares = list(x_train['gare'].unique())
+    gares.extend(list(x_valid['gare'].unique()))
+    gares.sort()
+    for gare in gares:
+        new_x_train[gare] = (x_train['gare'] == gare).astype(int)
+        new_x_valid[gare] = (x_valid['gare'] == gare).astype(int)
+    new_x_train.drop('gare', axis=1, inplace=True)
+    new_x_valid.drop('gare', axis=1, inplace=True)
+    return new_x_train, new_x_valid
 def prepare_data(x_columns, train_path = f'../data/train/', test_path = f'../data/test/'):
     from sklearn.preprocessing import LabelEncoder
     x_category_columns = ['train', 'gare', 'date']
@@ -42,7 +54,8 @@ def prepare_data(x_columns, train_path = f'../data/train/', test_path = f'../dat
     x_valid = pandas.read_csv(f'{test_path}x_test_final.csv', index_col=False)[x_news_columns]
 
     # x_train, x_valid = encode_with_label(x_train, x_valid, x_category_columns)
-    x_train, x_valid = encode_with_one_hot(x_train, x_valid, x_category_columns)
+    # x_train, x_valid = encode_with_one_hot(x_train, x_valid)
+    x_train, x_valid = encode_with_custom(x_train, x_valid)
 
     def _train_test_split(x_train, y_train, test_size):
         from random import shuffle
