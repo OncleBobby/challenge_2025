@@ -36,7 +36,10 @@ def encode_with_custom(x_train, x_valid):
     new_x_valid = x_valid.copy()
     gares = list(x_train['gare'].unique())
     gares.extend(list(x_valid['gare'].unique()))
-    gares.sort()
+
+    x = pandas.concat([x_train, x_valid])
+    gares = x.groupby('gare').size().reset_index(name='count').sort_values(by='count', ascending=False)['gare'].to_list()
+
     for gare in gares:
         new_x_train[gare] = (x_train['gare'] == gare).astype(int)
         new_x_valid[gare] = (x_valid['gare'] == gare).astype(int)
