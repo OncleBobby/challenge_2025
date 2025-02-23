@@ -1,0 +1,49 @@
+# stacking:
+#   class: models.stacking_model.StackingModel  
+#   params:
+#     class_names:
+#       - sklearn.linear_model.LinearRegression
+#       - catboost.CatBoostRegressor
+#       - lightgbm.LGBMRegressor
+#       - sklearn.linear_model.RidgeCV
+#     final_estimator: sklearn.linear_model.RidgeCV
+xgboost:
+  class: models.xgboost_model.XgboostModel
+lightgbm:
+  class: models.lightgbm_model.LightgbmModel
+catboost:
+  class: models.catboost_model.CatboostModel
+# keras:
+#   class: models.keras_model.KerasModel
+#   params:
+#     batch_size: 16
+#     epochs: 1
+#     validation_split: 0.3
+#     layers:
+#       - { units: 25, activation: elu }
+#       - { units: 25, activation: elu }
+#       - { units: 25, activation: elu }
+#       - { units: 25, activation: elu }
+#       - { units: 25, activation: elu }
+#       - { units: 1, activation: linear }
+# logistic:
+#   class: models.sklearn_model.SklearnModel  
+#   params:
+#     random_state: 0
+#     class_name: sklearn.linear_model.LogisticRegression
+linear:
+  class: models.sklearn_model.SklearnModel  
+  params:
+    class_name: sklearn.linear_model.LinearRegression
+bernoulli:
+  class: models.sklearn_model.SklearnModel  
+  params:
+    class_name: sklearn.naive_bayes.BernoulliNB
+# kneighbors:
+#   class: models.sklearn_model.SklearnModel  
+#   params:
+#     class_name: sklearn.neighbors.KNeighborsRegressor
+ridgecv:
+  class: models.sklearn_model.SklearnModel  
+  params:
+    class_name: sklearn.linear_model.RidgeCV

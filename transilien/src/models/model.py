@@ -20,6 +20,6 @@ class Model:
     from sklearn.metrics import mean_absolute_error
     mae = mean_absolute_error(self.y_test, y_pred)
     return mae
-  def save(self, X, file_name_pattern='../data/test/y_predict{name}.csv'):
+  def save(self, X, file_name_pattern):
       y_pred = self.predict(X)
       y_pred.to_csv(file_name_pattern.format(name=self.name))

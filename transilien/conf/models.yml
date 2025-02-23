@@ -81,10 +81,6 @@ bernoulli:
 #   class: models.sklearn_model.SklearnModel  
 #   params:
 #     class_name: sklearn.neighbors.KNeighborsRegressor
-# mlp:
-#   class: models.sklearn_model.SklearnModel  
-#   params:
-#     class_name: sklearn.neural_network.MLPRegressor
 # decisionTree:
 #   class: models.sklearn_model.SklearnModel  
 #   params:
@@ -97,6 +93,10 @@ bernoulli:
 #   class: models.sklearn_model.SklearnModel  
 #   params:
 #     class_name: sklearn.linear_model.RidgeCV
+# mlp:
+#   class: models.sklearn_model.SklearnModel  
+#   params:
+#     class_name: sklearn.neural_network.MLPRegressor
 # svr:
 #   class: models.sklearn_model.SklearnModel  
 #   params:

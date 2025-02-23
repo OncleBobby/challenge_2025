@@ -46,7 +46,7 @@ def encode_with_custom(x_train, x_valid):
     new_x_train.drop('gare', axis=1, inplace=True)
     new_x_valid.drop('gare', axis=1, inplace=True)
     return new_x_train, new_x_valid
-def prepare_data(x_columns, train_path = f'../data/train/', test_path = f'../data/test/'):
+def prepare_data(x_columns, train_path = f'../data/train/', test_path = f'../data/test/'):   
     from sklearn.preprocessing import LabelEncoder
     # x_category_columns = ['train', 'gare', 'date']
     y_column = 'p0q0'
@@ -80,13 +80,13 @@ def prepare_data(x_columns, train_path = f'../data/train/', test_path = f'../dat
     x_test = x_test.drop('date', axis=1)
     x_valid = x_valid.drop('date', axis=1)
     return x_train, x_test, y_train, y_test, x_valid
-
-def evaluate_models(x_train, y_train, x_test, y_test, x_valid=None):
+def evaluate_models(x_train, y_train, x_test, y_test, models_path = '../conf/models.yml'):
     from models.factory import ModelFactory
-    with open('../conf/models.yml', 'r') as file:
+    with open(models_path, 'r') as file:
         configurations = yaml.safe_load(file)
     factory = ModelFactory(configurations, x_train, y_train, x_test, y_test)
     lines = []
+    models = []
     for model in factory.get_models():
         start = time.time()
         score = model.evaluate()
@@ -94,10 +94,12 @@ def evaluate_models(x_train, y_train, x_test, y_test, x_valid=None):
         duration = numpy.round((end-start), 2)
         logging.info(f'{model.name}={numpy.round(score, 4)} in {duration}s')
         lines.append({'name': model.name, 'score': score, 'duration': duration})
-        if not x_valid is None:
-            model.save(x_valid, file_name_pattern='../data/test/y_predict_{name}.csv')
+        models.append(model)
     df = pandas.DataFrame(lines).sort_values(by=['score'], ascending=True)
-    return df
+    return df, models
+def save_predictions(models, x_valid, file_name_pattern='../data/test/y_predict_{name}.csv'):
+    for model in models:
+        model.save(x_valid, file_name_pattern=file_name_pattern)
 
 if __name__ == "__main__":
     from models.factory import ModelFactory
