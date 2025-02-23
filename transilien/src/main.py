@@ -48,7 +48,7 @@ def encode_with_custom(x_train, x_valid):
     return new_x_train, new_x_valid
 def prepare_data(x_columns, train_path = f'../data/train/', test_path = f'../data/test/'):
     from sklearn.preprocessing import LabelEncoder
-    x_category_columns = ['train', 'gare', 'date']
+    # x_category_columns = ['train', 'gare', 'date']
     y_column = 'p0q0'
     x_news_columns = x_columns.copy()
     x_news_columns.append('date')
